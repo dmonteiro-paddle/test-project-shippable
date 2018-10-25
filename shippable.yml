@@ -20,7 +20,6 @@ build:
     # npm mirrors can sometimes be flacky, better to use shippable_retry
     # http://docs.shippable.com/ci/advancedOptions/retry/
     - docker build -t dmonteiropaddle/test-project-shippable:latest .
-    - popd
 
   post_ci:
     - docker push dmonteiropaddle/test-project-shippable:latest
