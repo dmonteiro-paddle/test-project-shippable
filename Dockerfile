@@ -1,13 +1,15 @@
-FROM node:8
+FROM node:9
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+RUN npm install -g contentful-cli
 
+COPY package.json .
 RUN npm install
 
 COPY . .
 
+USER node
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD ["npm", "run", "start:dev"]
