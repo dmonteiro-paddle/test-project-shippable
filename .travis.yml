@@ -8,17 +8,18 @@ env:
     - REGISTRY_PASS=$DOCKERPASS
     - secret: "<something long>"
 
+before_install:
+  - wget https://releases.hashicorp.com/terraform/0.10.6/terraform_0.10.6_linux_amd64.zip
+  - unzip terraform_0.10.6_linux_amd64.zip
+  - mv terraform terraform-ecs-cluster/
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+
 script:
   - docker build --pull --tag "$IMAGE_NAME" .
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+  - docker push "${IMAGE_NAME}:latest"
+  - chmod u+x terraform-ecs-cluster/build.sh
+  - ./terraform-ecs-cluster/build.sh
 
 after_script:
-  - docker images
-
-before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
-deploy:
-  provider: script
-  script: docker push "${IMAGE_NAME}:latest"
-  on:
-    branch: master
+  - ./terraform-ecs-cluster/destroy.sh
