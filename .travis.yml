@@ -1,0 +1,24 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - IMAGE_NAME=dmonteiropaddle/test-project-shippable
+    - REGISTRY_USER=dmonteiropaddle
+    - REGISTRY_PASS=$DOCKERPASS
+    - secret: "<something long>"
+
+script:
+  - docker build --pull --tag "$IMAGE_NAME" .
+
+after_script:
+  - docker images
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master
