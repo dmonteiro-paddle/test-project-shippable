@@ -1,7 +1,7 @@
-resource "aws_security_group" "mesh-vpc-security-group" {
-    name        = "mesh-vpc-security-group"
+resource "aws_security_group" "test-vpc-security-group" {
+    name        = "test-vpc-security-group"
     description = "Allow HTTP, HTTPS, and SSH"
-    vpc_id = "${aws_vpc.mesh-vpc.id}"
+    vpc_id = "${aws_vpc.test-vpc.id}"
 
     // HTTP
     ingress {
@@ -36,5 +36,5 @@ resource "aws_security_group" "mesh-vpc-security-group" {
 }
 
 output "security-group-id" {
-  value = "${aws_security_group.mesh-vpc-security-group.id}"
+  value = "${aws_security_group.test-vpc-security-group.id}"
 }

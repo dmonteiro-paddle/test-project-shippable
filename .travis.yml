@@ -22,4 +22,5 @@ script:
   - ./terraform-ecs-cluster/build.sh
 
 after_script:
+  - chmod u+x terraform-ecs-cluster/destroy.sh
   - ./terraform-ecs-cluster/destroy.sh

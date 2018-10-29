@@ -17,7 +17,7 @@ variable "ecs-key-pair-name" {}
 
 variable "autoscaling-group-name" {
     description = "The name for the autoscaling group for the cluster."
-    default     = "mesh-ecs-asg"
+    default     = "test-ecs-asg"
 }
 
 variable "max-instance-size" {
@@ -46,12 +46,12 @@ variable "health-check-grace-period" {
 
 variable "load-balancer-name" {
     description = "The name for the autoscaling group for the cluster."
-    default     = "mesh-ecs-load-balancer"
+    default     = "test-ecs-load-balancer"
 }
 
 variable "target-group-name" {
     description = "The name for the autoscaling group for the cluster."
-    default     = "mesh-ecs-target-group"
+    default     = "test-ecs-target-group"
 }
 
 //----------------------------------------------------------------------
@@ -60,7 +60,7 @@ variable "target-group-name" {
 
 variable "launch-configuration-name" {
     description = "The name for the autoscaling group for the cluster."
-    default = "mesh-ecs-launch-configuration"
+    default = "test-ecs-launch-configuration"
 }
 
 variable "image-id" {
